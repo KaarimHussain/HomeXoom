@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Prata&display=swap');
 
+
 * {
     margin: 0;
     padding: 0;
@@ -114,6 +115,20 @@ h6 {
 }
 
 .button-secondary {
+    color: var(--secondary-foreground);
+    background-color: var(--secondary-color);
+    border-radius: 15px;
+    padding: 10px 25px;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.button-secondary:hover {
+    color: var(--primary-foreground);
+    background-color: var(--primary-color);
+}
+
+.button-accent {
     color: var(--secondary-color);
     background-color: var(--secondary-foreground);
     border-radius: 15px;
@@ -122,7 +137,35 @@ h6 {
     transition: all 0.3s ease;
 }
 
-.button-secondary:hover {
+.button-accent:hover {
+    background-color: var(--secondary-color);
+    color: var(--secondary-foreground);
+}
+
+.button-primary-outline {
+    color: var(--primary-color);
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    border-radius: 15px;
+    padding: 10px 25px;
+    transition: all 0.3s ease;
+}
+
+.button-primary-outline:hover {
+    background-color: var(--primary-color);
+    color: var(--primary-foreground);
+}
+
+.button-secondary-outline {
+    color: var(--secondary-color);
+    background-color: transparent;
+    border: 1px solid var(--secondary-color);
+    border-radius: 15px;
+    padding: 10px 25px;
+    transition: all 0.3s ease;
+}
+
+.button-secondary-outline:hover {
     background-color: var(--secondary-color);
     color: var(--secondary-foreground);
 }

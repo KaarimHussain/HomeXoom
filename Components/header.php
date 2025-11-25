@@ -41,7 +41,7 @@
             </button>
             <div>
                 <button class="button-primary">Login</button>
-                <button class="button-secondary">Register</button>
+                <button class="button-accent">Register</button>
             </div>
         </div>
     </div>

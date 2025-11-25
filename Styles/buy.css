@@ -6,3 +6,11 @@
     background-position: center;
     height: 50vh;
 }
+
+.input{
+    border: none;
+    border-bottom: 2px solid var(--secondary-color);
+    width: 100%;
+    padding: 10px 20px;
+    outline: none;
+}
