@@ -1,6 +1,6 @@
-<section class="min-h-100vh">
-    <div class="d-flex flex-column gap-2 align-items-start justify-content-between">
-        <h5 class="h6 fw-bold text-secondary-color font-inter text-uppercase">
+<section class="min-h-screen">
+    <div class="flex flex-col gap-2 items-start justify-between">
+        <h5 class="text-lg font-bold text-secondary-color font-inter uppercase">
             The News
         </h5>
     </div>

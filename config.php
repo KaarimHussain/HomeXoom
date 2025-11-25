@@ -26,15 +26,33 @@ define("COMPONENT_DIR", ROOT_DIR . "/Components");
 <!-- Global elements and styling -->
 <link rel="stylesheet" href="<?php echo STYLES_URL ?>/base.css?v=<?php echo time(); ?>">
 <link rel="stylesheet" href="<?php echo STYLES_URL ?>/header.css?v=<?php echo time(); ?>">
-<link rel="stylesheet" href="<?php echo BASE_URL ?>/node_modules/bootstrap/dist/css/bootstrap.min.css">
-<!-- Development version -->
-<script src="<?php echo BASE_URL ?>/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
-<!-- Implement the Lucide Icon -->
+<!-- Lucide Icons -->
 <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
 <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    'primary-color': 'var(--primary-color)',
+                    'secondary-color': 'var(--secondary-color)',
+                    'primary-foreground': 'var(--primary-foreground)',
+                    'secondary-foreground': 'var(--secondary-foreground)',
+                    'text-color': 'var(--text-color)',
+                    'bg-primary': 'var(--bg-primary)',
+                    'bg-secondary': 'var(--bg-secondary)',
+                },
+                fontFamily: {
+                    'inter': ['Inter', 'sans-serif'],
+                    'prata': ['Prata', 'serif'],
+                }
+            }
+        }
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
         lucide.createIcons();
     });
 </script>
-<!--  -->
