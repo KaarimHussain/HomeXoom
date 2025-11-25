@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Prata&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+:root {
+    --primary-color: #4384ff;
+    --secondary-color: #001a4b;
+    --text-color: #000;
+    --primary-foreground: #fff;
+    --secondary-foreground: #fff;
+    --bg-primary: #fff;
+    --bg-secondary: #001336;
+}
+
+.text-primary-color {
+    color: var(--primary-color);
+}
+
+.text-secondary-color {
+    color: var(--secondary-color);
+}
+
+.text-color {
+    color: var(--text-color);
+}
+
+.text-primary-foreground {
+    color: var(--primary-foreground);
+}
+
+.text-secondary-foreground {
+    color: var(--secondary-foreground);
+}
+
+.text-bg-primary {
+    color: var(--bg-primary);
+}
+
+.text-bg-secondary {
+    color: var(--bg-secondary);
+}
+
+.bg-primary-color {
+    background-color: var(--primary-color);
+}
+
+.bg-secondary-color {
+    background-color: var(--secondary-color);
+}
+
+.bg-text-color {
+    background-color: var(--text-color);
+}
+
+.bg-primary-foreground {
+    background-color: var(--primary-foreground);
+}
+
+.bg-secondary-foreground {
+    background-color: var(--secondary-foreground);
+}
+
+.bg-primary {
+    background-color: var(--bg-primary);
+}
+
+.bg-secondary {
+    background-color: var(--bg-secondary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--secondary-color);
+    font-family: "Prata", serif;
+}
+
+.font-inter {
+    font-family: "Inter", sans-serif;
+}
+
+.font-prata {
+    font-family: "Prata", serif;
+}
