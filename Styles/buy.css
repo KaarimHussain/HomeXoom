@@ -1,0 +1,8 @@
+@import url("./base.css");
+
+.hero-section {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../Images/Buy-Background.png");
+    background-size: cover;
+    background-position: center;
+    height: 50vh;
+}

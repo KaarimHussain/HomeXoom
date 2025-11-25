@@ -8,13 +8,19 @@
 }
 
 :root {
-    --primary-color: #4384ff;
-    --secondary-color: #001a4b;
-    --text-color: #000;
-    --primary-foreground: #fff;
-    --secondary-foreground: #fff;
-    --bg-primary: #fff;
-    --bg-secondary: #001336;
+    --primary-color: rgb(67, 132, 255);
+    --secondary-color: rgb(0, 26, 75);
+    --text-color: rgb(0, 0, 0);
+    --primary-foreground: rgb(255, 255, 255);
+    --secondary-foreground: rgb(255, 255, 255);
+    --bg-primary: rgb(255, 255, 255);
+    --bg-secondary: rgb(0, 26, 75);
+}
+
+body,
+html {
+    height: 100%;
+    width: 100%;
 }
 
 .text-primary-color {
@@ -89,4 +95,62 @@ h6 {
 
 .font-prata {
     font-family: "Prata", serif;
+}
+
+/* Global Styling */
+
+.button-primary {
+    color: var(--primary-foreground);
+    background-color: var(--primary-color);
+    border-radius: 15px;
+    padding: 10px 25px;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.button-primary:hover {
+    background-color: var(--primary-foreground);
+    color: var(--primary-color);
+}
+
+.button-secondary {
+    color: var(--secondary-color);
+    background-color: var(--secondary-foreground);
+    border-radius: 15px;
+    padding: 10px 25px;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.button-secondary:hover {
+    background-color: var(--secondary-color);
+    color: var(--secondary-foreground);
+}
+
+.min-h-100vh {
+    min-height: 100vh;
+}
+
+.h-100vh {
+    height: 100vh;
+}
+
+.h-screen {
+    height: 100vh;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.w-screen {
+    width: 100vw;
+}
+
+.min-h-50vh {
+    min-height: 50vh;
+}
+
+.min-h-75vh {
+    min-height: 75vh;
 }
