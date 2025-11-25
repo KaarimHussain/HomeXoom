@@ -22,22 +22,22 @@ HomeXoom is a comprehensive real estate marketplace that streamlines property tr
 
 ## Technology Stack
 
-*[Add your specific technologies here]*
-
-- Frontend: 
-- Backend: 
-- Database: 
-- Authentication: 
-- Payment Processing: 
+- **Frontend**: HTML5, CSS3, Bootstrap 5
+- **Backend**: PHP
+- **Database**: MySQL
+- **Maps Integration**: Google Maps API
+- **Payment Processing**: Stripe API 
 
 ## Getting Started
 
 ### Prerequisites
 
 ```bash
-# List required software and versions
-Node.js >= 14.x
-npm >= 6.x
+# Required software and versions
+PHP >= 7.4
+MySQL >= 5.7
+Apache/Nginx Web Server
+Composer (for PHP dependency management)
 ```
 
 ### Installation
@@ -49,25 +49,51 @@ git clone https://github.com/yourusername/homexoom.git
 # Navigate to project directory
 cd homexoom
 
-# Install dependencies
-npm install
+# Install PHP dependencies (if using Composer)
+composer install
+
+# Import database
+mysql -u username -p database_name < database/homexoom.sql
+
+# Configure your web server to point to the project directory
+# For Apache, update your httpd.conf or create a virtual host
+# For Nginx, update your server configuration
 
 # Set up environment variables
-cp .env.example .env
+cp config.example.php config.php
 
-# Run the application
-npm start
+# Update config.php with your database and API credentials
 ```
 
 ### Environment Variables
 
-Create a `.env` file in the root directory with the following variables:
+Create a `config.php` file in the root directory with the following configuration:
 
-```
-DATABASE_URL=your_database_url
-API_KEY=your_api_key
-JWT_SECRET=your_jwt_secret
-PAYMENT_GATEWAY_KEY=your_payment_key
+```php
+<?php
+// Database Configuration
+define('DB_HOST', 'localhost');
+define('DB_USER', 'your_database_user');
+define('DB_PASS', 'your_database_password');
+define('DB_NAME', 'homexoom_db');
+
+// Google Maps API
+define('GOOGLE_MAPS_API_KEY', 'your_google_maps_api_key');
+
+// Stripe Payment Gateway
+define('STRIPE_PUBLIC_KEY', 'your_stripe_public_key');
+define('STRIPE_SECRET_KEY', 'your_stripe_secret_key');
+
+// Site Configuration
+define('SITE_URL', 'http://localhost/homexoom');
+define('SITE_NAME', 'HomeXoom');
+
+// Email Configuration (if applicable)
+define('SMTP_HOST', 'your_smtp_host');
+define('SMTP_USER', 'your_email@example.com');
+define('SMTP_PASS', 'your_email_password');
+define('SMTP_PORT', '587');
+?>
 ```
 
 ## Usage
