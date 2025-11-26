@@ -62,10 +62,10 @@ $data =
 
 <head>
     <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Buy - <?php echo TTITLE; ?></title>
-        <link rel="stylesheet" href="<?php echo STYLES_URL ?>/buy.css?v=<?php echo time(); ?>">
-    </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy - <?php echo TTITLE; ?></title>
+    <link rel="stylesheet" href="<?php echo STYLES_URL ?>/buy.css?v=<?php echo time(); ?>">
+</head>
 
 <body>
     <?php include COMPONENT_DIR . "/header.php"; ?>
@@ -188,6 +188,10 @@ $data =
         <!-- NEWS -->
         <?php include "Components/news.php"; ?>
         <!-- ========= -->
+    </section>
+    <section class="container mx-auto py-10">
+        <!-- FOOTER -->
+        <?php include "Components/footer.php"; ?>
     </section>
 </body>
 

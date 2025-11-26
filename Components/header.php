@@ -1,7 +1,7 @@
-<nav class="fixed top-0 z-50 p-1 lg:p-3 header w-full">
-    <div class="container mx-auto flex items-center justify-between">
-        <a class="navbar-brand" href="#">
-            <img src="<?php echo BASE_URL ?>/Images/Logo.png" class="img-fluid w-24 sm:w-56" alt="HomeXoom Logo">
+<nav class="fixed top-0 left-0 right-0 z-50 p-1 lg:p-3 header max-w-7xl mx-auto">
+    <div class="container mx-auto px-4 flex items-center justify-between">
+        <a class="navbar-brand" href="<?php echo BASE_URL ?>">
+            <img src="<?php echo BASE_URL ?>/Images/Logo.png" class="img-fluid w-30 sm:w-56" alt="HomeXoom Logo">
         </a>
 
         <!-- Mobile Menu Button -->
@@ -13,22 +13,26 @@
         <div class="hidden lg:flex items-center gap-8">
             <ul class="flex gap-6 m-0 p-0 list-none">
                 <li><a class="nav-link text-secondary-foreground hover:text-primary-color transition-colors"
-                        href="#">Home</a></li>
+                        href="<?php echo BASE_URL ?>">Home</a></li>
                 <li><a class="nav-link text-secondary-foreground hover:text-primary-color transition-colors"
-                        href="#">Buy</a></li>
+                        href="<?php echo BASE_URL ?>/buy.php">Buy</a></li>
                 <li><a class="nav-link text-secondary-foreground hover:text-primary-color transition-colors"
-                        href="#">Sell</a></li>
+                        href="<?php echo BASE_URL ?>/sell.php">Sell</a></li>
                 <li><a class="nav-link text-secondary-foreground hover:text-primary-color transition-colors"
-                        href="#">Listing</a></li>
+                        href="<?php echo BASE_URL ?>/listing.php">Listing</a></li>
                 <li><a class="nav-link text-secondary-foreground hover:text-primary-color transition-colors"
-                        href="#">Services</a></li>
+                        href="<?php echo BASE_URL ?>/services.php">Services</a></li>
                 <li><a class="nav-link text-secondary-foreground hover:text-primary-color transition-colors"
-                        href="#">Our Team</a></li>
+                        href="<?php echo BASE_URL ?>/our-team.php">Our Team</a></li>
             </ul>
-            <div class="flex items-center gap-3">
+        </div>
+        <div class="hidden lg:flex items-center gap-3">
+            <a href="<?php echo BASE_URL ?>/login.php">
                 <button class="button-primary">Login</button>
+            </a>
+            <a href="<?php echo BASE_URL ?>/register.php">
                 <button class="button-accent">Register</button>
-            </div>
+            </a>
         </div>
 
         <!-- Mobile Menu Overlay -->
@@ -37,7 +41,7 @@
 
         <!-- Mobile Menu Sidebar -->
         <div id="mobile-menu"
-            class="fixed top-0 right-0 h-screen w-64 bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out shadow-xl flex flex-col">
+            class="fixed lg:hidden top-0 right-0 h-screen w-64 bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out shadow-xl flex flex-col">
             <div class="p-4 flex justify-between items-center border-b">
                 <h5 class="text-xl font-prata text-secondary-color">HomeXoom</h5>
                 <button id="close-menu-btn" class="p-2 text-gray-600 hover:text-gray-900 focus:outline-none">
@@ -46,19 +50,26 @@
             </div>
             <div class="p-4 flex-grow overflow-y-auto">
                 <ul class="flex flex-col gap-4 list-none p-0 m-0">
-                    <li><a class="block text-secondary-color hover:text-primary-color font-inter" href="#">Home</a></li>
-                    <li><a class="block text-secondary-color hover:text-primary-color font-inter" href="#">Buy</a></li>
-                    <li><a class="block text-secondary-color hover:text-primary-color font-inter" href="#">Sell</a></li>
-                    <li><a class="block text-secondary-color hover:text-primary-color font-inter" href="#">Listing</a>
-                    </li>
-                    <li><a class="block text-secondary-color hover:text-primary-color font-inter" href="#">Services</a>
-                    </li>
-                    <li><a class="block text-secondary-color hover:text-primary-color font-inter" href="#">Our Team</a>
-                    </li>
+                    <li><a class="block text-secondary-color hover:text-primary-color font-inter"
+                            href="<?php echo BASE_URL ?>">Home</a></li>
+                    <li><a class="block text-secondary-color hover:text-primary-color font-inter"
+                            href="<?php echo BASE_URL ?>/buy.php">Buy</a></li>
+                    <li><a class="block text-secondary-color hover:text-primary-color font-inter"
+                            href="<?php echo BASE_URL ?>/sell.php">Sell</a></li>
+                    <li><a class="block text-secondary-color hover:text-primary-color font-inter"
+                            href="<?php echo BASE_URL ?>/listing.php">Listing</a></li>
+                    <li><a class="block text-secondary-color hover:text-primary-color font-inter"
+                            href="<?php echo BASE_URL ?>/services.php">Services</a></li>
+                    <li><a class="block text-secondary-color hover:text-primary-color font-inter"
+                            href="<?php echo BASE_URL ?>/our-team.php">Our Team</a></li>
                 </ul>
                 <div class="mt-6 flex flex-col gap-3">
-                    <button class="button-primary w-full">Login</button>
-                    <button class="button-accent w-full">Register</button>
+                    <a href="<?php echo BASE_URL ?>/login.php">
+                         <button class="button-primary w-full">Login</button>
+                    </a>
+                    <a href="<?php echo BASE_URL ?>/register.php">
+                        <button class="button-accent w-full">Register</button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -77,7 +88,6 @@
             if (isClosed) {
                 mobileMenu.classList.remove('translate-x-full');
                 overlay.classList.remove('hidden');
-                // Small delay to allow display:block to apply before opacity transition
                 setTimeout(() => overlay.classList.remove('opacity-0'), 10);
             } else {
                 mobileMenu.classList.add('translate-x-full');

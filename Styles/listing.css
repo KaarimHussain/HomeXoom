@@ -1,0 +1,16 @@
+@import url("./base.css");
+
+.hero-section {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../Images/Listing-Background.png");
+    background-size: cover;
+    background-position: center;
+    height: 50vh;
+}
+
+.input {
+    border: none;
+    border-bottom: 2px solid var(--secondary-color);
+    width: 100%;
+    padding: 10px 20px;
+    outline: none;
+}

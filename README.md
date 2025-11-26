@@ -22,7 +22,7 @@ HomeXoom is a comprehensive real estate marketplace that streamlines property tr
 
 ## Technology Stack
 
-- **Frontend**: HTML5, CSS3, Bootstrap 5
+- **Frontend**: HTML5, CSS3, Tailwind 4
 - **Backend**: PHP
 - **Database**: MySQL
 - **Maps Integration**: Google Maps API
