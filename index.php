@@ -1,6 +1,31 @@
 <?php
 include "config.php";
 
+require_once ROOT_DIR . '/Controllers/db.controller.php';
+require_once ROOT_DIR . '/Models/Property.php';
+
+use HomeXoom\Controllers\DBController;
+use HomeXoom\Models\Property;
+
+$db = new DBController();
+$db->openConnection();
+$conn = $db->getConnection();
+
+// Category Mapping
+$categoryMap = [
+    'APARTMENT' => 'Condo',
+    'FAMILY HOUSE' => 'Single Family',
+    'COMMERCIAL BUILDING' => 'Commercial'
+];
+
+$selectedCategory = isset($_GET['category']) ? $_GET['category'] : null;
+$dbCategory = null;
+
+if ($selectedCategory && isset($categoryMap[$selectedCategory])) {
+    $dbCategory = $categoryMap[$selectedCategory];
+}
+
+$recentProperties = Property::getRecent($conn, 3, $dbCategory);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,9 +56,9 @@ include "config.php";
                 odit
                 aut sed a excepturi. Explicabo, omnis.
             </p>
-            <div>
-                <button class="button-primary">BECOME A MEMBER</button>
-                <button class="button-secondary">REFER US</button>
+            <div class="flex gap-4 items-center">
+                <button class="button-primary rounded-full">BECOME A MEMBER</button>
+                <button class="button-secondary rounded-full">REFER US</button>
             </div>
         </div>
     </main>
@@ -55,7 +80,6 @@ include "config.php";
                     deleniti atque corrupti quos dolores et
                 </p>
             </div>
-        </div>
         </div>
         <!-- PROPERTY TYPES SECTION -->
         <section class="py-20">
@@ -188,128 +212,72 @@ include "config.php";
                         At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
                         deleniti atque corrupti quos dolores et
                     </p>
-                    <button class="button-secondary-outline">EXPLORE MORE</button>
+                    <a href="buy.php" class="button-secondary-outline rounded-full">EXPLORE MORE</a>
                 </div>
             </div>
 
             <!-- Filter Buttons -->
             <div class="flex flex-wrap gap-4 mb-12">
-                <button
-                    class="px-6 py-3 rounded-full bg-secondary-color text-white font-inter text-sm font-semibold uppercase transition-all hover:bg-opacity-90">
+                <button onclick="filterProperties('APARTMENT')"
+                    class="filter-btn px-6 py-3 rounded-full <?php echo (!$selectedCategory || $selectedCategory === 'APARTMENT') ? 'bg-secondary-color text-white' : 'border-2 border-secondary-color text-secondary-color'; ?> font-inter text-sm font-semibold uppercase transition-all hover:bg-secondary-color hover:text-white">
                     APARTMENT
                 </button>
-                <button
-                    class="px-6 py-3 rounded-full border-2 border-secondary-color text-secondary-color font-inter text-sm font-semibold uppercase transition-all hover:bg-secondary-color hover:text-white">
+                <button onclick="filterProperties('FAMILY HOUSE')"
+                    class="filter-btn px-6 py-3 rounded-full <?php echo ($selectedCategory === 'FAMILY HOUSE') ? 'bg-secondary-color text-white' : 'border-2 border-secondary-color text-secondary-color'; ?> font-inter text-sm font-semibold uppercase transition-all hover:bg-secondary-color hover:text-white">
                     FAMILY HOUSE
                 </button>
-                <button
-                    class="px-6 py-3 rounded-full border-2 border-secondary-color text-secondary-color font-inter text-sm font-semibold uppercase transition-all hover:bg-secondary-color hover:text-white">
+                <button onclick="filterProperties('COMMERCIAL BUILDING')"
+                    class="filter-btn px-6 py-3 rounded-full <?php echo ($selectedCategory === 'COMMERCIAL BUILDING') ? 'bg-secondary-color text-white' : 'border-2 border-secondary-color text-secondary-color'; ?> font-inter text-sm font-semibold uppercase transition-all hover:bg-secondary-color hover:text-white">
                     COMMERCIAL BUILDING
                 </button>
             </div>
 
             <!-- Property Cards Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-                <!-- Property Card 1 -->
-                <div class="group">
-                    <div class="relative overflow-hidden rounded-lg mb-4">
-                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800"
-                            alt="Lake Club Drive"
-                            class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
-                    </div>
-                    <h3 class="text-2xl mb-2">Lake Club Drive</h3>
-                    <p class="text-gray-600 font-inter text-sm mb-3">1220 LAKE CLUB DRIVE Greensboro</p>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-gray-800 font-inter font-semibold text-lg">$6,495,000</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <div class="flex gap-4 text-sm font-inter text-gray-600">
-                            <span class="flex items-center gap-1">
-                                <i data-lucide="bed" class="w-4 h-4"></i>
-                                1-3
-                            </span>
-                            <span class="flex items-center gap-1">
-                                <i data-lucide="bath" class="w-4 h-4"></i>
-                                1-3
-                            </span>
-                            <span class="flex items-center gap-1">
-                                <i data-lucide="warehouse" class="w-4 h-4"></i>
-                                1-3
-                            </span>
+                <?php if (!empty($recentProperties)): ?>
+                    <?php foreach ($recentProperties as $property): ?>
+                        <!-- Property Card -->
+                        <div class="group">
+                            <div class="relative overflow-hidden rounded-lg mb-4">
+                                <img src="<?php echo htmlspecialchars($property['image_url'] ?? 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800'); ?>"
+                                    alt="<?php echo htmlspecialchars($property['title']); ?>"
+                                    class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                            </div>
+                            <h3 class="text-2xl mb-2"><?php echo htmlspecialchars($property['title']); ?></h3>
+                            <p class="text-gray-600 font-inter text-sm mb-3"><?php echo htmlspecialchars($property['address']); ?></p>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-gray-800 font-inter font-semibold text-lg">
+                                    $<?php echo number_format($property['price']); ?>
+                                </span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex gap-4 text-sm font-inter text-gray-600">
+                                    <span class="flex items-center gap-1">
+                                        <i data-lucide="bed" class="w-4 h-4"></i>
+                                        <?php echo htmlspecialchars($property['bedrooms'] ?? 'N/A'); ?>
+                                    </span>
+                                    <span class="flex items-center gap-1">
+                                        <i data-lucide="bath" class="w-4 h-4"></i>
+                                        <?php echo htmlspecialchars($property['bathrooms'] ?? 'N/A'); ?>
+                                    </span>
+                                    <span class="flex items-center gap-1">
+                                        <i data-lucide="warehouse" class="w-4 h-4"></i>
+                                        <?php echo htmlspecialchars($property['garage'] ?? 'N/A'); ?>
+                                    </span>
+                                </div>
+                                <a href="property-details.php?id=<?php echo $property['id']; ?>"
+                                    class="button-secondary-outline rounded-full text-sm px-6 whitespace-nowrap">
+                                    VIEW PROPERTY
+                                </a>
+                            </div>
                         </div>
-                        <button class="button-secondary-outline rounded-full text-sm px-6 whitespace-nowrap">
-                            VIEW PROPERTY
-                        </button>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <!-- No Properties Message -->
+                    <div class="col-span-full text-center py-12">
+                        <p class="text-gray-600 font-inter text-lg">No properties available in this category at the moment.</p>
                     </div>
-                </div>
-
-                <!-- Property Card 2 -->
-                <div class="group">
-                    <div class="relative overflow-hidden rounded-lg mb-4">
-                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800"
-                            alt="Lake Club Drive"
-                            class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
-                    </div>
-                    <h3 class="text-2xl mb-2">Lake Club Drive</h3>
-                    <p class="text-gray-600 font-inter text-sm mb-3">1220 LAKE CLUB DRIVE Greensboro</p>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-gray-800 font-inter font-semibold text-lg">$6,495,000</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <div class="flex gap-4 text-sm font-inter text-gray-600">
-                            <span class="flex items-center gap-1">
-                                <i data-lucide="bed" class="w-4 h-4"></i>
-                                1-3
-                            </span>
-                            <span class="flex items-center gap-1">
-                                <i data-lucide="bath" class="w-4 h-4"></i>
-                                1-3
-                            </span>
-                            <span class="flex items-center gap-1">
-                                <i data-lucide="warehouse" class="w-4 h-4"></i>
-                                1-3
-                            </span>
-                        </div>
-                        <button class="button-secondary-outline rounded-full text-sm px-6 whitespace-nowrap">
-                            VIEW PROPERTY
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Property Card 3 -->
-                <div class="group">
-                    <div class="relative overflow-hidden rounded-lg mb-4">
-                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800"
-                            alt="Lake Club Drive"
-                            class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
-                    </div>
-                    <h3 class="text-2xl mb-2">Lake Club Drive</h3>
-                    <p class="text-gray-600 font-inter text-sm mb-3">1220 LAKE CLUB DRIVE Greensboro</p>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-gray-800 font-inter font-semibold text-lg">$6,495,000</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <div class="flex gap-4 text-sm font-inter text-gray-600">
-                            <span class="flex items-center gap-1">
-                                <i data-lucide="bed" class="w-4 h-4"></i>
-                                1-3
-                            </span>
-                            <span class="flex items-center gap-1">
-                                <i data-lucide="bath" class="w-4 h-4"></i>
-                                1-3
-                            </span>
-                            <span class="flex items-center gap-1">
-                                <i data-lucide="warehouse" class="w-4 h-4"></i>
-                                1-3
-                            </span>
-                        </div>
-                        <button class="button-secondary-outline rounded-full text-sm px-6 whitespace-nowrap">
-                            VIEW PROPERTY
-                        </button>
-                    </div>
-                </div>
-
+                <?php endif; ?>
             </div>
         </section>
 
@@ -390,95 +358,16 @@ include "config.php";
             </div>
         </section>
 
+        <!-- NEWS -->
+        <?php include "Components/news.php"; ?>
 
-        <!-- NEWS SECTION -->
-        <section class="py-20">
-            <div class="mb-12">
-                <p class="text-sm font-inter text-secondary-color uppercase tracking-wider mb-4">THE NEWS</p>
-                <div class="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8">
-                    <h2 class="text-4xl sm:text-5xl lg:text-6xl font-prata leading-tight">
-                        News about us<br>
-                        and our activities
-                    </h2>
-                    <div class="lg:text-left">
-                        <p class="text-gray-600 font-inter mb-6 max-w-md">
-                            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                            voluptatum
-                            deleniti atque corrupti quos dolores et
-                        </p>
-                        <button class="button-secondary-outline rounded-full">EXPLORE MORE</button>
-                    </div>
-                </div>
-            </div>
+        <!-- CTA -->
+        <?php include "Components/cta.php"; ?>
+        <!-- ========= -->
+    </section>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- Large Featured News Item -->
-                <div class="relative group">
-                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800"
-                        alt="Featured Property" class="w-full h-[500px] object-cover rounded-lg">
-
-                    <div class="absolute bottom-6 left-6 bg-white rounded-full px-4 py-2 flex items-center gap-3">
-                        <img src="https://ui-avatars.com/api/?name=Adam+Smiths&background=random" alt="Author"
-                            class="w-10 h-10 rounded-full">
-                        <div>
-                            <p class="text-xs text-primary-color font-semibold font-inter uppercase">Robigan News</p>
-                            <p class="text-xs text-gray-600 font-inter">Adam Smiths</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Column with Stacked News Items -->
-                <div class="flex flex-col gap-8">
-                    <!-- News Item 1 -->
-                    <div class="flex gap-6">
-                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400"
-                            alt="Property News" class="w-64 h-48 object-cover rounded-lg flex-shrink-0">
-                        <div class="flex flex-col justify-center">
-                            <p class="text-xs text-primary-color font-semibold font-inter uppercase mb-2">Robigan News
-                            </p>
-                            <h3 class="text-2xl font-prata mb-3">Lorem Ipsum dolor sit amets</h3>
-                            <p class="text-gray-600 font-inter text-sm">
-                                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                                voluptatum
-                                deleniti atque
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- News Item 2 -->
-                    <div class="flex gap-6">
-                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400"
-                            alt="Property News" class="w-64 h-48 object-cover rounded-lg flex-shrink-0">
-                        <div class="flex flex-col justify-center">
-                            <p class="text-xs text-primary-color font-semibold font-inter uppercase mb-2">Robigan News
-                            </p>
-                            <h3 class="text-2xl font-prata mb-3">Lorem Ipsum dolor sit amets</h3>
-                            <p class="text-gray-600 font-inter text-sm">
-                                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                                voluptatum
-                                deleniti atque
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Bottom Featured News -->
-            <div class="mt-8 flex flex-col md:flex-row gap-6">
-                <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600" alt="Property News"
-                    class="w-full md:w-1/2 h-64 object-cover rounded-lg">
-                <div class="flex flex-col justify-center md:w-1/2">
-                    <p class="text-xs text-primary-color font-semibold font-inter uppercase mb-2">Robigan News</p>
-                    <h3 class="text-3xl font-prata mb-4">Lorem Ipsum dolor sit amets</h3>
-                    <p class="text-gray-600 font-inter">
-                        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-                        deleniti atque
-                    </p>
-                </div>
-            </div>
-        </section>
-
-
+    <section class="container py-10">
+        <?php include COMPONENT_DIR . "/footer.php"; ?>
     </section>
 
 
@@ -555,7 +444,7 @@ include "config.php";
         document.addEventListener('DOMContentLoaded', () => {
             const filterButtons = document.querySelectorAll('[class*="rounded-full"]').forEach(btn => {
                 if (btn.textContent.includes('APARTMENT') || btn.textContent.includes('FAMILY HOUSE') || btn.textContent.includes('COMMERCIAL BUILDING')) {
-                    btn.addEventListener('click', function () {
+                    btn.addEventListener('click', function() {
                         // Remove active state from all buttons
                         this.parentElement.querySelectorAll('button').forEach(b => {
                             b.classList.remove('bg-secondary-color', 'text-white');
@@ -568,6 +457,20 @@ include "config.php";
                     });
                 }
             });
+        });
+
+        function filterProperties(category) {
+            // Update URL with selected category
+            const url = new URL(window.location.href);
+            url.searchParams.set('category', category);
+            window.location.href = url.toString();
+        }
+
+        // Initialize Lucide icons after page load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
         });
     </script>
 

@@ -16,25 +16,36 @@ $conn = $dbController->getConnection();
 
 // checking if the request method is POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $user_type = $_POST["user_type"];
+    $fullname = $_POST["fullname"];
     $email = $_POST["email"];
+    $phone = $_POST["phone"];
     $password = $_POST["password"];
 
     $registerController = new RegisterController($conn);
     try {
-        $user = $registerController->Login($email, $password);
-        // Sessions Messages
-        $_SESSION["message_box"] = array(
-            "type" => "success",
-            "message" => "Login Successful"
-        );
-        header("Location: index.php");
-        exit();
+        if ($registerController->Register($user_type, $fullname, $email, $phone, $password)) {
+            // Sessions Messages
+            $_SESSION["message_box"] = array(
+                "type" => "success",
+                "message" => "Registeration Successful"
+            );
+            header("Location: register.php");
+            exit();
+        } else {
+            $_SESSION["message_box"] = array(
+                "type" => "error",
+                "message" => "Registeration Failed"
+            );
+            header("Location: register.php");
+            exit();
+        }
     } catch (Exception $ex) {
         $_SESSION["message_box"] = array(
             "type" => "error",
             "message" => $ex->getMessage()
         );
-        header("Location: login.php");
+        header("Location: register.php");
         exit();
     }
 } else {
@@ -42,6 +53,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "type" => "error",
         "message" => "Invalid Request Method"
     );
-    header("Location: login.php");
+    header("Location: register.php");
     exit();
 }

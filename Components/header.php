@@ -26,14 +26,33 @@
                         href="<?php echo BASE_URL ?>/our-team.php">Our Team</a></li>
             </ul>
         </div>
-        <div class="hidden lg:flex items-center gap-3">
-            <a href="<?php echo BASE_URL ?>/login.php">
-                <button class="button-primary">Login</button>
-            </a>
-            <a href="<?php echo BASE_URL ?>/register.php">
-                <button class="button-accent">Register</button>
-            </a>
-        </div>
+        <?php
+        if (!isset($_SESSION["isLoggedIn"])) {
+        ?>
+            <div class="hidden lg:flex items-center gap-3">
+                <a href="<?php echo BASE_URL ?>/login.php">
+                    <button class="button-primary">Login</button>
+                </a>
+                <a href="<?php echo BASE_URL ?>/register.php">
+                    <button class="button-accent">Register</button>
+                </a>
+            </div>
+        <?php
+        }
+        if (isset($_SESSION["isLoggedIn"])) {
+        ?>
+            <div class="hidden lg:flex items-center gap-3">
+                <a href="<?php echo BASE_URL ?>/profile.php">
+                    <button class="button-primary">Profile</button>
+                </a>
+                <a href="<?php echo BASE_URL ?>/logout.php">
+                    <button class="button-accent">Logout</button>
+                </a>
+            </div>
+        <?php
+        }
+        ?>
+
 
         <!-- Mobile Menu Overlay -->
         <div id="mobile-menu-overlay"
@@ -63,21 +82,39 @@
                     <li><a class="block text-secondary-color hover:text-primary-color font-inter"
                             href="<?php echo BASE_URL ?>/our-team.php">Our Team</a></li>
                 </ul>
-                <div class="mt-6 flex flex-col gap-3">
-                    <a href="<?php echo BASE_URL ?>/login.php">
-                         <button class="button-primary w-full">Login</button>
-                    </a>
-                    <a href="<?php echo BASE_URL ?>/register.php">
-                        <button class="button-accent w-full">Register</button>
-                    </a>
-                </div>
+                <?php
+                if (!isset($_SESSION["isLoggedIn"])) {
+                ?>
+                    <div class="mt-6 flex flex-col gap-3">
+                        <a href="<?php echo BASE_URL ?>/login.php">
+                            <button class="button-primary w-full">Login</button>
+                        </a>
+                        <a href="<?php echo BASE_URL ?>/register.php">
+                            <button class="button-accent w-full">Register</button>
+                        </a>
+                    </div>
+                <?php
+                }
+                if (isset($_SESSION["isLoggedIn"])) {
+                ?>
+                    <div class="mt-6 flex flex-col gap-3">
+                        <a href="<?php echo BASE_URL ?>/profile.php">
+                            <button class="button-primary w-full">Profile</button>
+                        </a>
+                        <a href="<?php echo BASE_URL ?>/logout.php">
+                            <button class="button-accent w-full">Logout</button>
+                        </a>
+                    </div>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </div>
 </nav>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         const menuBtn = document.getElementById('mobile-menu-btn');
         const closeBtn = document.getElementById('close-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');

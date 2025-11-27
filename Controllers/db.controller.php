@@ -1,7 +1,11 @@
 <?php
+
 namespace HomeXoom\Controllers;
 
+include_once __DIR__ . "/../config.php";
+
 use mysqli;
+
 class DBController
 {
 
@@ -47,6 +51,4 @@ class DBController
     {
         $this->closeConnection();
     }
-
-
 }

@@ -1,5 +1,11 @@
 <?php
 include "config.php";
+
+// Checking if user is already logged in
+if (isset($_SESSION['isLoggedIn'])) {
+    header("Location: index.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,9 +29,26 @@ include "config.php";
                         <h2 class="text-4xl md:text-5xl mb-3">Create Account</h2>
                         <p class="text-gray-600 font-inter">Sign up to get started with us</p>
                     </div>
-
+                    <div class="my-5">
+                        <?php
+                        if (isset($_SESSION['message_box']) && $_SESSION['message_box']['type'] == 'success') {
+                            echo '<div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">';
+                            echo '<strong class="font-bold">Success!</strong> ';
+                            echo '<span class="block sm:inline">' . htmlspecialchars($_SESSION['message_box']['message']) . '</span>';
+                            echo '</div>';
+                            unset($_SESSION['message_box']); // Clear the message after displaying
+                        }
+                        if (isset($_SESSION['message_box']) && $_SESSION['message_box']['type'] == 'error') {
+                            echo '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">';
+                            echo '<strong class="font-bold">Error!</strong> ';
+                            echo '<span class="block sm:inline">' . htmlspecialchars($_SESSION['message_box']['message']) . '</span>';
+                            echo '</div>';
+                            unset($_SESSION['message_box']); // Clear the message after displaying
+                        }
+                        ?>
+                    </div>
                     <!-- Register Form -->
-                    <form action="" method="POST" class="space-y-6">
+                    <form action="register.process.php" method="POST" class="space-y-6">
                         <!-- User Type Selection -->
                         <div>
                             <label class="block text-sm font-medium font-inter mb-3">I want to</label>
@@ -165,7 +188,7 @@ include "config.php";
         lucide.createIcons();
 
         // Toggle Password Visibility
-        document.getElementById('toggle-password').addEventListener('click', function () {
+        document.getElementById('toggle-password').addEventListener('click', function() {
             const passwordInput = document.getElementById('password');
             const icon = this.querySelector('i');
 
@@ -180,7 +203,7 @@ include "config.php";
         });
 
         // Toggle Confirm Password Visibility
-        document.getElementById('toggle-confirm-password').addEventListener('click', function () {
+        document.getElementById('toggle-confirm-password').addEventListener('click', function() {
             const confirmPasswordInput = document.getElementById('confirm-password');
             const icon = this.querySelector('i');
 
@@ -195,7 +218,7 @@ include "config.php";
         });
 
         // Password Match Validation
-        document.querySelector('form').addEventListener('submit', function (e) {
+        document.querySelector('form').addEventListener('submit', function(e) {
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirm-password').value;
 

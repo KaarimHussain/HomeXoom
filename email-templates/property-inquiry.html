@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Property Inquiry</title>
+</head>
+
+<body
+    style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f5f5f5;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f5f5; padding: 40px 20px;">
+        <tr>
+            <td align="center">
+                <!-- Main Container -->
+                <table width="600" cellpadding="0" cellspacing="0"
+                    style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+
+                    <!-- Header -->
+                    <tr>
+                        <td
+                            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 30px; text-align: center;">
+                            <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 600;">New Property
+                                Inquiry</h1>
+                            <p style="margin: 10px 0 0 0; color: #f0f0f0; font-size: 14px;">You have received a new
+                                inquiry from HomeXoom</p>
+                        </td>
+                    </tr>
+
+                    <!-- Property Info -->
+                    <tr>
+                        <td style="padding: 30px; background-color: #f8f9fa; border-bottom: 3px solid #667eea;">
+                            <h2 style="margin: 0 0 15px 0; color: #333; font-size: 22px;">Property Details</h2>
+                            <table width="100%" cellpadding="8" cellspacing="0">
+                                <tr>
+                                    <td style="color: #666; font-size: 14px; padding: 8px 0;">
+                                        <strong style="color: #333;">Property:</strong>
+                                    </td>
+                                    <td style="color: #333; font-size: 14px; padding: 8px 0; text-align: right;">
+                                        {{property_title}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #666; font-size: 14px; padding: 8px 0;">
+                                        <strong style="color: #333;">Price:</strong>
+                                    </td>
+                                    <td
+                                        style="color: #667eea; font-size: 18px; font-weight: 600; padding: 8px 0; text-align: right;">
+                                        ${{property_price}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #666; font-size: 14px; padding: 8px 0;">
+                                        <strong style="color: #333;">Location:</strong>
+                                    </td>
+                                    <td style="color: #333; font-size: 14px; padding: 8px 0; text-align: right;">
+                                        {{property_address}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #666; font-size: 14px; padding: 8px 0;">
+                                        <strong style="color: #333;">Property ID:</strong>
+                                    </td>
+                                    <td style="color: #333; font-size: 14px; padding: 8px 0; text-align: right;">
+                                        #{{property_id}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Visitor Info -->
+                    <tr>
+                        <td style="padding: 30px;">
+                            <h2 style="margin: 0 0 20px 0; color: #333; font-size: 22px;">Visitor Information</h2>
+
+                            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;">
+                                <tr>
+                                    <td
+                                        style="padding: 15px; background-color: #f8f9fa; border-radius: 8px; margin-bottom: 10px;">
+                                        <table width="100%" cellpadding="5" cellspacing="0">
+                                            <tr>
+                                                <td width="40" valign="top">
+                                                    <div
+                                                        style="width: 40px; height: 40px; background-color: #667eea; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; font-weight: bold;">
+                                                        👤
+                                                    </div>
+                                                </td>
+                                                <td style="padding-left: 15px;">
+                                                    <p style="margin: 0; color: #666; font-size: 12px;">Name</p>
+                                                    <p
+                                                        style="margin: 5px 0 0 0; color: #333; font-size: 16px; font-weight: 600;">
+                                                        {{visitor_name}}</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;">
+                                <tr>
+                                    <td style="padding: 15px; background-color: #f8f9fa; border-radius: 8px;">
+                                        <table width="100%" cellpadding="5" cellspacing="0">
+                                            <tr>
+                                                <td width="40" valign="top">
+                                                    <div
+                                                        style="width: 40px; height: 40px; background-color: #764ba2; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px;">
+                                                        ✉️
+                                                    </div>
+                                                </td>
+                                                <td style="padding-left: 15px;">
+                                                    <p style="margin: 0; color: #666; font-size: 12px;">Email</p>
+                                                    <p
+                                                        style="margin: 5px 0 0 0; color: #333; font-size: 16px; font-weight: 600;">
+                                                        <a href="mailto:{{visitor_email}}"
+                                                            style="color: #667eea; text-decoration: none;">{{visitor_email}}</a>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;">
+                                <tr>
+                                    <td style="padding: 15px; background-color: #f8f9fa; border-radius: 8px;">
+                                        <table width="100%" cellpadding="5" cellspacing="0">
+                                            <tr>
+                                                <td width="40" valign="top">
+                                                    <div
+                                                        style="width: 40px; height: 40px; background-color: #667eea; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px;">
+                                                        📞
+                                                    </div>
+                                                </td>
+                                                <td style="padding-left: 15px;">
+                                                    <p style="margin: 0; color: #666; font-size: 12px;">Phone</p>
+                                                    <p
+                                                        style="margin: 5px 0 0 0; color: #333; font-size: 16px; font-weight: 600;">
+                                                        <a href="tel:{{visitor_phone}}"
+                                                            style="color: #667eea; text-decoration: none;">{{visitor_phone}}</a>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Message -->
+                            <div
+                                style="padding: 20px; background-color: #fffbf0; border-left: 4px solid #ffc107; border-radius: 8px; margin-top: 20px;">
+                                <p
+                                    style="margin: 0 0 10px 0; color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">
+                                    Message</p>
+                                <p style="margin: 0; color: #333; font-size: 15px; line-height: 1.6;">
+                                    {{visitor_message}}</p>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- CTA Button -->
+                    <tr>
+                        <td style="padding: 30px; text-align: center; background-color: #f8f9fa;">
+                            <p style="margin: 0 0 20px 0; color: #666; font-size: 14px;">Respond quickly to increase
+                                your chances of closing the deal!</p>
+                            <a href="mailto:{{visitor_email}}"
+                                style="display: inline-block; padding: 15px 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #ffffff; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);">
+                                Reply to {{visitor_name}}
+                            </a>
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style="padding: 30px; text-align: center; background-color: #333; color: #ffffff;">
+                            <p style="margin: 0 0 10px 0; font-size: 18px; font-weight: 600;">HomeXoom</p>
+                            <p style="margin: 0; font-size: 12px; color: #999;">The Gateway to Buy, Sell, Bid or Rent
+                            </p>
+                            <p style="margin: 15px 0 0 0; font-size: 11px; color: #666;">
+                                This is an automated notification. Please do not reply to this email.
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

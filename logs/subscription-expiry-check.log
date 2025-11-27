@@ -1,0 +1,7 @@
+[2025-11-27 01:15:30] Starting subscription expiry check...
+[2025-11-27 01:15:30] Expired subscription ID: 1, User ID: 1, Stripe ID: sub_1SXrWCEPs4E7smEdkeFvnqWy
+[2025-11-27 01:15:30] Completed: Marked 1 subscription(s) as expired.
+
+[2025-11-27 01:21:54] Starting subscription expiry check...
+[2025-11-27 01:21:54] No expired subscriptions found.
+
